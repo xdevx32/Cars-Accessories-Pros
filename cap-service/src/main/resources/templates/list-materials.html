@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head"></head>
+    <body>
+        <h1 th:text="${title}"></h1>
+        <nav th:replace="fragments :: navigation"></nav>
+        <h2>Материали:</h2>
+        <div class="col-6">
+            <table class="table table-hover">
+                <th>Номер</th>
+                <th>Име</th>
+                <th>Квадратни метри</th>
+                <th>Цвят</th>
+                <th>Цена</th>
+                <p th:unless="${materials} and ${materials.size()}">Нямате материали :(</p>
+                <tr th:each="material : ${materials}">
+                    <td th:text="${material.id}"></td>
+                    <td th:text="${material.name}"></td>
+                    <td th:text="${material.squareMeters}"></td>
+                    <td th:text="${material.color}"></td>
+                    <td th:text="${material.price + ' лв.'}"></td>
+                   
+                    <td> <a class="btn btn-danger" th:href="@{'/materials/delete/'+${material.id}}">Изтрий</a> </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

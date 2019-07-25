@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head"></head>
+    <body>
+        <h1 th:text="'' + ${title} + ''"></h1>
+        <nav th:replace="fragments :: navigation"></nav>
+        <h2>Работници:</h2>
+        <div class="col-6">
+            <table class="table table-hover">
+                <th>Номер</th>
+                <th>Име</th>
+                <th>Ниво на опит</th>
+                <th>Детайли на час</th>
+                <th>Заплащане на час</th>
+                <th>Дата на започване</th>
+                <th>Работни дни в фирмата</th>
+                <p th:unless="${employees} and ${employees.size()}">Нямате работници :(</p>
+                <tr th:each="employee : ${employees}">
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.experience}"></td>
+                    <td th:text="${employee.detailsPerHour}"></td>
+                    <td th:text="${employee.payPerHour + ' лв.'}"></td>
+                    <td th:text="${employee.startDate}"></td>
+                    <td th:text="${employee.daysWorked}"></td>
+                    <td> <a class="btn btn-danger" th:href="@{'/employees/delete/'+${employee.id}}">Изтрий</a> </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

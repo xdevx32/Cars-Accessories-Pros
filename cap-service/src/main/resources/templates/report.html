@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head"></head>
+    <body>
+        <h1 th:text="'' + ${title} + ''"></h1>
+        <nav th:replace="fragments :: navigation"></nav>
+
+        <h2 th:text="${'Разходи към дата: ' + currentDate + ' г.'}"></h2>
+        <div class="col-6">
+            <table class="table table-hover">
+                <th>Вид</th>
+                <th>Сума</th>
+                <tr>
+                	<td th:text="${'По заплати на работници'}"></td>
+                	<td th:text="${expensesBasedOnSalaries} + ' лв.'"></td>
+                </tr>
+                <tr>
+                	<td th:text="${'По закупуване на материали'}"></td>
+                	<td th:text="${expensesBasedOnMaterialsBought + ' лв.'}"></td>
+                </tr>
+
+                <tr>
+                	<td th:text="${'Общо'}"></td>
+                	<td th:text="${expensesTotal + ' лв.'}"></td>
+                </tr>
+            </table>
+        </div>
+        <h2 th:text="${'Приходи към дата: ' + currentDate + ' г.'}"></h2>
+        <div class="col-6">
+            <table class="table table-hover">
+                <th>Вид</th>
+                <th>Сума</th>
+                <tr>
+                	<td th:text="${'От произведени детайли'}"></td>
+                	<td th:text="${incomeBasedOnDetailsProduced + ' лв.'}"></td>
+                </tr>
+                <tr>
+                	<td th:text="${'Общо'}"></td>
+                	<td th:text="${incomeTotal + ' лв.'}"></td>
+                </tr>
+            </table>
+        </div>
+        <h2 th:text="${'Печалба към дата: ' + currentDate + ' г.'}"></h2>
+        <div class="col-6">
+            <table class="table table-hover">
+                <th>Вид</th>
+                <th>Сума</th>
+                <tr>
+                	<td th:text="${'Общо'}"></td>
+                	<td th:text="${profitBasedOnDetailsProduced + ' лв.'}"></td>
+                </tr>
+                <tr>
+                	<td th:text="${'Общо - 10%(данък печалба)'}" style="font-weight: bold; text-decoration: underline;"></td>
+                	<td th:text="${profitTotal + ' лв.'}" style="font-weight: bold; text-decoration: underline;"></td>
+                </tr>
+                <small id="required" class="form-text text-muted">*След успешна продажба на детайли.</small>
+            </table>
+        </div>
+    </body>
+</html>

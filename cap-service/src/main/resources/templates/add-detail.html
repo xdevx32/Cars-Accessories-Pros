@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head"></head>
+    <meta charset="UTF-8"/>
+    <body>
+        <h1 th:text="'' + ${title} + ''"></h1>
+        <nav th:replace="fragments :: navigation"></nav>
+        <h2>Въведете данни във формата за детайли</h2>
+        <div class="col-6">
+            <form  action="#" th:action="@{/details/add}" th:object="${detail}" method="post" >
+                <div class="form-group">
+                    <label for="name">Име</label>
+                    <input class="form-control" type="text" th:field="*{name}"  placeholder="Име" id="name"/>
+                    
+                    <label for="materials">Материали за детайл</label>
+			     	<small id="required" class="form-text text-muted" style="color: green;">Моля, изберете материали за изработка.</small>
+			     	
+       				<select class="form-control" id="material" name="materials" style="width: auto;" multiple>
+					    <option th:each="material : ${materials}"
+					            th:value="${{material.id}}"
+					            th:text="${'Име: ' + material.name + ', ' + 'Размер: ' + material.squareMeters + ', ' + 'Цена: ' + material.price}"
+					            th:name="${{material.name}}"
+					            th:id="${{material.id}}"
+					            >
+					    </option>
+					</select>
+                    
+                    <label for="price">Приблизително време за изработка(за бройка)</label>
+                    <input class="form-control" type="text" th:field="*{timeToCreate}"  placeholder="Приблизително време за изработка" id="timeToCreate"/>
+                    <label for="quantity">Количество</label>
+                    <input class="form-control" type="text" th:field="*{quantity}"  placeholder="Количество" id="quantity"/>
+                    <label for="price">Продажна цена(за бройка)</label>
+                    <input class="form-control" type="text" th:field="*{price}"  placeholder="Цена" id="price"/>
+                </div>
+                <small id="required" class="form-text text-muted">Всички полета са задължителни.</small>
+                <button type="submit" class="btn btn-primary">Добави детайл</button> 
+            </form>
+        </div>
+
+    </body>
+</html>

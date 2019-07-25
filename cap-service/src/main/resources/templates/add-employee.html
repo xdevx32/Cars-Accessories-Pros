@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head"></head>
+    <meta charset="UTF-8"/>
+    <body>
+        <h1 th:text="${title}"></h1>
+        <nav th:replace="fragments :: navigation"></nav>
+        <h2>Въведете данни във формата за работници</h2>
+        <div class="col-6">
+            <form  action="#" th:action="@{/employees/add}" th:object="${employee}" method="post" >
+                <div class="form-group">
+                    
+                    <label for="name">Име</label>
+                    <input class="form-control" type="text" th:field="*{name}"  placeholder="Име" id="name"/>
+                    
+                    <label for="experience">Опит</label>
+                    <select class="form-control" id="experience" name="experience">
+					    <option th:each="experience : ${T(acho.nbu.cars.accessories.pros.people.Experience).values()}"
+					            th:value="${{experience}}"
+					            th:text="${{experience}}"
+					            th:name="${{experience}}"
+					            th:id="${{experience}}"
+					            >
+					    </option>
+					</select>
+                    
+                    <label for="detailsPerHour">Детайли на час</label>
+                    <input class="form-control" type="text" th:field="*{detailsPerHour}"  placeholder="Детайли на час" id="detailsPerHour"/>
+                    
+                    <label for="payPerHour">Заплащане на час</label>
+                    <input class="form-control" type="text" th:field="*{payPerHour}"  placeholder="Заплащане на час" id="payPerHour"/>
+
+                	<label for="startDate">Дата на постъпване</label>
+                	<input class="form-control" type="text" th:field="*{startDate}"  placeholder="Дата на постъпване във формат 'YYYY-mm-DD'" id="startDate"/>
+
+
+                    <small id="name" class="form-text text-muted">Всички полета са задължителни.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Добави работник</button> 
+            </form>
+        </div>
+
+    </body>
+</html>

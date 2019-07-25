@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head"></head>
+    <body>
+        <h1 th:text="'' + ${title} + ''"></h1>
+        <nav th:replace="fragments :: navigation"></nav>
+        <h2>Детайли:</h2>
+        <div class="col-6">
+            <table class="table table-hover">
+                <th>Номер</th>
+                <th>Име</th>
+                <th>Материали</th>
+                <th>Цена на материалите</th>
+                <th>Приблизително време за изработка</th>
+                <th>Количество</th>
+                <th>Продажна цена(за бройка)</th>
+                <p th:unless="${details} and ${details.size()}">Нямате детайли :(</p>
+                <tr th:each="detail : ${details}">
+                    <td th:text="${detail.id}"></td>
+                    <td th:text="${detail.name}"></td>
+                  
+                    <td>
+                    	<div th:each="material : ${detail.materials}">
+                    		<p style="font-size: 12px;" th:text="${material.name}"></p>
+                    	</div>
+                    </td>
+
+                    <td th:text="${detail.calculateMaterialsCost()}"></td>
+                    <td th:text="${detail.timeToCreate}"></td>
+                    <td th:text="${detail.quantity}"></td>
+                    <td th:text="${detail.price + ' лв.'}"></td>
+                   
+                    <td> <a class="btn btn-danger" th:href="@{'/details/delete/'+${detail.id}}">Изтрий</a> </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

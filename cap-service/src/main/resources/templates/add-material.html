@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: head"></head>
+    <meta charset="UTF-8"/>
+    <body>
+        <h1 th:text="'' + ${title} + ''"></h1>
+        <nav th:replace="fragments :: navigation"></nav>
+        <h2>Въведете данни във формата за материали</h2>
+        <div class="col-6">
+            <form  action="#" th:action="@{/materials/add}" th:object="${material}" method="post" >
+                <div class="form-group">
+                    <label for="name">Име</label>
+                    <input class="form-control" type="text" th:field="*{name}"  placeholder="Име" id="name"/>
+                    <small id="name" class="form-text text-muted">Полето за име на материал е задължително.</small>
+                    <label for="squareMeters">Квадратни метри</label>
+                    <input class="form-control" type="text" th:field="*{squareMeters}"  placeholder="Квадратни метри" id=""squareMeters""/>
+                    
+                    <label for="color">Цвят</label>
+                    
+                    <select class="form-control" id="color" name="color">
+					    <option th:each="color : ${T(acho.nbu.cars.accessories.pros.product.Color).values()}"
+					            th:value="${{color}}"
+					            th:text="${{color}}"
+					            th:name="${{color}}"
+					            th:id="${{color}}"
+					            >
+					    </option>
+					</select>
+                    
+                    <label for="price">Цена</label>
+                    <input class="form-control" type="text" th:field="*{price}"  placeholder="Цена" id="price"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Добави материал</button> 
+            </form>
+        </div>
+
+    </body>
+</html>
